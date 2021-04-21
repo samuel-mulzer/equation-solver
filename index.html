@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>equation solver</title>
+
+
+    <meta name="description" content="A powerful and simple solver for expanded, high-order equations - free to use!">
+    <meta name="author" content="Samuel Mulzer ">
+    <meta name="date" content="2021-04-17T14:59:19Z">
+    <meta name="keywords" lang="de" content="Mathematik, Gleichung, Gleichung lösen, Taschenrechner">
+    <meta name="keywords" lang="en" content="maths, equation, solver, calculator">
+    <meta http-equiv="language" content="DE">
+    <meta charset="utf-8">
+    <meta http-equiv="expires" content="43200">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0" >
+
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" id="theme-stylesheet" href="/css/style.css">
+    <script src="/js/mode.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+
+
+    <meta name="application-name" content="">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Samuel Mulzer">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+
+<body>
+
+    <header>
+        <a href="https://samuel-mulzer.ddns.net">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" id="logo">
+                <path id="S" d="M 44 14 c -35 10 -18 21 0 28 c 35 12 49 46 -28 49 c -7 0 -7 -4 -1 -4 c 49 -4 72 -22 26 -40 c -51 -17 -12 -40 3 -40 c 17 -1 8 5 0 7" />
+                <path id="M" d="M 40 51 c 31 -47 38 -45 30 -24 c -4 13 -3 13 4 1 c 13 -20 20 -22 7 14 c -1 5 -6 5 -1 -6 c 9 -23 7 -24 -6 -4 c -8 14 -12 14 -6 -5 c 6 -16 6 -20 -25 25 c -3 4 -5 3 -3 -1" />
+            </svg>
+        </a>
+        
+
+        <h2>equation solver</h2>
+
+        <span id="calculations-label">calculations: <wbr><span id="calculations"></span></span>
+    </header>
+
+    <main>
+
+        <div id="input-section">
+            <div id="order-section">
+                <label for="order-label">
+                    <div>The order of your equation: <span id="order-output"></span></div>
+                    <input type="range" id="order-input" min="1" max="8" step="1">
+                </label>
+            </div>
+        
+            <div id="coefficient-section">
+
+            </div>
+
+            <button id="button">Run</button>
+        </div>
+    
+    
+    
+        <div id="output-section">
+            <ul id="solution-list"></ul>
+            <ul id="linear-factor-list"></ul>
+        </div>
+    </main>
+
+
+    <footer>
+        <button class="material-icons">info</button>
+        <p>&copy;&nbsp;2021 |&nbsp;Built&nbsp;by&nbsp;Samuel&nbsp;Mulzer |&nbsp;<a href="mailto:samuel-mulzer@icloud.com">Report bugs</a></p>
+    </footer>
+
+</body>
+
+</html>
