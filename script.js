@@ -19,7 +19,7 @@ const linearFactorList = document.getElementById("linear-factor-list");
 // localstorage for calculation counter
 if (!localStorage.calculations){
     localStorage.setItem("calculations",0);
-    help();
+    setTimeout(help, 3200);
 }
 const calculations = document.getElementById("calculations");
 calculations.textContent = localStorage.calculations
