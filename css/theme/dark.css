@@ -1,7 +1,0 @@
-:root{
-    --main-color: rgb(221,221,221);
-    --accent-color: rgb(54,119,255); /* #3677FF */
-    --accent-color2: rgb(255,96,0); /* #FF6000 */
-    --gradient: linear-gradient(90deg, darkblue,darkorchid);
-    --background-color: rgb(18,18,18);
-}
