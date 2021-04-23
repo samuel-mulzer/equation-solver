@@ -40,12 +40,13 @@ header #calculations-label{
     font-family: monospace;
     font-size: 0.8rem;
     text-align: center;
+    margin-left: 2vw;
 }
 
 header svg#logo {
     width: 4vw;
-    min-width: 1cm;
-    margin-right: 8vw;
+    min-width: 1.2cm;
+    margin-right: 6vw;
 }
 svg#logo path{
     fill: var(--main-color);
