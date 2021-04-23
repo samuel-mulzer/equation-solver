@@ -19,7 +19,14 @@ const linearFactorList = document.getElementById("linear-factor-list");
 // localstorage for calculation counter
 if (!localStorage.calculations){
     localStorage.setItem("calculations",0);
-    setTimeout(help, 3200);
+
+    setTimeout(() => {
+        if (confirm("Would you like to get a short tutorial?")){
+            help();
+        }else {
+            alert("Click the h-key to catch up on the intoduction later.");
+        }
+    }, 2000);
 }
 const calculations = document.getElementById("calculations");
 calculations.textContent = localStorage.calculations
@@ -270,6 +277,7 @@ function help() {
     alert("You will also see the number of solutions in the button and the corresponding linear factor at the right of each solution.");
     alert("Just update your input to run the next equation.");
     alert("I hope you enjoy this powerful and simple tool and it makes your live a bit easier!");
-    alert("Furthermore if you have any ideas you want to share or you want to report a bug, just hover over the info label and click the link in the footer.");
+    alert("You can also use the tab-key to switch between input elements and the enter-key to run your equation.")
+    alert("Furthermore if you have any ideas you would like to share or you want to report a bug, \njust hover over the info label and use the link in the footer.");
     alert("Just click the h-key on your keyboard to repeat this short tutorial. \nLet's get started!");
 }
