@@ -41,45 +41,69 @@ let solutions = [];
 // getting order input and setting the eqution input
 orderInput.value = 3;
 order = orderInput.value;
-orderOuput.innerHTML = order;
+orderOuput.textContent = order;
+
+
+
+
+// process after clicking the button
+let run = () => {
+    clearOuput();
+
+    getCoefficients();
+    solveEquation();
+    setOutput();
+    
+
+    localStorage.calculations = parseInt(localStorage.calculations) + 1;
+    calculations.textContent = localStorage.calculations
+
+    toOuputView();
+}
+button.addEventListener("click", run);
+
+
+
 
 let setEquation = order => {
-    coefficientSection.innerText = "";
+    coefficientSection.textContent = "";
 
-    for (i = order; i >= 0; i--) {
+    let setCoefficient = i => {
         let span = document.createElement("span");
-
-
-
+    
         let input = document.createElement("input");
         input.type = "number"
         input.required = true;
         input.placeholder = 1;
         input.classList.add("coefficient-input");
         span.appendChild(input);
-
-
-
-
+    
+    
         let expression = document.createElement("span");
         expression.textContent = "x";
-
-
+    
+    
         let sup = document.createElement("sup");
         sup.textContent = i;
         expression.appendChild(sup);
-
+    
+    
         let operator = document.createElement("span");
         if (i > 0) {
             operator.textContent = " +";
         } else {
             operator.textContent = " = 0";
         }
+    
         expression.appendChild(operator);
+    
+        span.appendChild(expression);
+    
+        return span;
+    }
 
-        span.appendChild(expression)
-
-
+    for (i = order; i >= 0; i--) {
+        span = setCoefficient(i);
         coefficientSection.appendChild(span);
     }
 
@@ -98,31 +122,10 @@ orderInput.addEventListener("input", () => {
     orderInput.setAttribute("max", parseInt(window.innerWidth / 100));
 
     order = orderInput.value;
-    orderOuput.innerHTML = order;
+    orderOuput.textContent = order;
 
     setEquation(order);
 });
-
-
-
-
-
-
-// process after clicking the button
-let run = () => {
-    clearOuput();
-
-    getCoefficients();
-    solveEquation();
-    setSolutions();
-    
-
-    localStorage.calculations = parseInt(localStorage.calculations) + 1;
-    calculations.textContent = localStorage.calculations
-
-    toOuputView();
-}
-button.addEventListener("click", run);
 
 
 // switching between input and output view
@@ -181,6 +184,8 @@ function getCoefficients() {
     coefficients.reverse();
 }
 
+
+
 // solving the equation and saving the results in the solutions array
 function solveEquation() {
     console.time("solvingTime");
@@ -188,12 +193,14 @@ function solveEquation() {
     while (n <= 2000) {
         let sum = 0;
 
+        x = n / 100
+
         for (i = 0; i < coefficients.length; i++) {
-            sum += (coefficients[i] * ((n/100) ** i));
+            sum += (coefficients[i] * ((x) ** i));
         }
 
         if (sum == 0) {
-            solutions.push(n/100);
+            solutions.push(x);
         }
 
         n++;
@@ -202,39 +209,39 @@ function solveEquation() {
 }
 
 // setting the solutions and linear factors in the output section
-function setSolutions() {
+function setOutput() {
 
     button.textContent = "solutions: " + solutions.length;
     console.log("solutions: " + `(determined: ${solutions.length})`);
 
-    for (i = 0; i < solutions.length; i++) {
 
+    let setSolutionItem = solution => {
         let solutionItem = document.createElement("li");
-        let solution = solutions[i];
         solutionItem.textContent = solution;
         if (solution >= 0) {
             solutionItem.style.paddingLeft = "4px";
         }
-        solutionList.appendChild(solutionItem);
-
-
-        let linearFactorItem = document.createElement("li");
-        let linearFactor;
-
-        if (solutions[i] > 0) {
-            linearFactor = `(x - ${solutions[i]})`;
-        } else if (solutions[i] == 0) {
-            linearFactor = "x"
-        } else if (solutions[i] < 0) {
-            linearFactor = `(x + ${-solutions[i]})`
-        }
-
-        linearFactorItem.textContent = linearFactor
-        linearFactorList.appendChild(linearFactorItem);
-
-
-        console.log(`${solution} -> ${linearFactor}`);
+        return solutionItem;
     }
+
+    let getLinearFactor = solution => {
+        
+        if (solution > 0) {
+            linearFactor = `(x - ${solution})`;
+        } else if (solution == 0) {
+            linearFactor = "x"
+        } else if (solution < 0) {
+            linearFactor = `(x + ${-solution})`
+        }
+        return linearFactor
+    }
+
+    let setLinearfactorItem = linearFactor => {
+        let linearFactorItem = document.createElement("li");
+        linearFactorItem.textContent = linearFactor;
+        return linearFactorItem;
+    }
+
 
     if (solutions.length == 0) {
         solutionList.textContent = "";
@@ -244,9 +251,23 @@ function setSolutions() {
         let message = document.createElement("li");
         message.innerText = "no solutions determined";
         solutionList.appendChild(message);
-    }
-}
+    } else {
+        for (i = 0; i < solutions.length; i++) {
 
+            let solution = solutions[i]
+            let solutionItem = setSolutionItem(solution)
+            solutionList.appendChild(solutionItem);
+    
+    
+            let linearFactor = getLinearFactor(solution)
+            let linearFactorItem = setLinearfactorItem(linearFactor)
+            linearFactorList.appendChild(linearFactorItem);
+    
+            console.log(`${solution}  →  ${linearFactor}`);
+        }
+    }
+
+}
 
 
 
@@ -257,7 +278,7 @@ document.addEventListener('keydown', event =>  {
     // console.log("key: " + key);
     // console.log("code: " + code);
 
-    if (code == "Tab") {
+    if (code == "Tab" || code == "Escape") {
         toInputView();
     } else if (code == "Enter") {
         run();
