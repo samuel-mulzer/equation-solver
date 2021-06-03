@@ -150,7 +150,7 @@ input:focus {
 
 footer {
     font-size: 0.8rem;
-    height: 5vh;
+    height: 3vh;
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -169,8 +169,8 @@ footer a{
 }
 footer button {
     position: absolute;
-    bottom: 4px;
-    left: 4px;
+    bottom: 32%;
+    left: 6px;
     color: var(--main-color);
     background-color: transparent;
     border: none;
@@ -179,6 +179,7 @@ footer button {
 footer:hover{
     color: rgb(221,221,221);
     background-color: #000;
+    height: 8vh;
 }
 footer:hover p{
     color: rgb(221,221,221);
