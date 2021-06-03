@@ -8,18 +8,18 @@
 
 
     <meta name="description" content="A powerful and simple solver for expanded, high-order equations - free to use!">
-    <meta name="author" content="Samuel Mulzer ">
-    <meta name="date" content="2021-04-17T14:59:19Z">
-    <meta name="keywords" lang="de" content="Mathematik, Gleichung, Gleichung lösen, Taschenrechner">
-    <meta name="keywords" lang="en" content="maths, equation, solver, calculator">
-    <meta http-equiv="language" content="DE">
+    <meta name="author" content="Samuel Mulzer">
+    <meta name="date" content="2021-06-03T13:36:10.591Z">
+    <meta name="keywords" content="maths, equation solver, calculator, samuel, samuel mulzer">
     <meta charset="utf-8">
     <meta http-equiv="expires" content="43200">
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
 
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" id="theme-stylesheet" href="">
-    <script src="/js/theme.js"></script>
+    <script src="/js/theme.js" id="theme-script"></script>
+    <link rel="preload" href="/css/theme/light.css" as="style">
+    <link rel="preload" href="/css/theme/dark.css" as="style">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -33,12 +33,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Samuel Mulzer">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKZ2YLBXJB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-GKZ2YLBXJB');
+    </script>
 </head>
 
 <body>
 
     <header>
-        
+
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" id="logo">
             <path id="S"
                 d="M 44 14 c -35 10 -18 21 0 28 c 35 12 49 46 -28 49 c -7 0 -7 -4 -1 -4 c 49 -4 72 -22 26 -40 c -51 -17 -12 -40 3 -40 c 17 -1 8 5 0 7" />
@@ -51,7 +60,7 @@
         </svg>
 
 
-        <h2>equation solver</h2>
+        <h1>equation solver</h1>
 
         <span id="calculations-label">calcu&shy;lations: <wbr>
             <span id="calculations"></span>

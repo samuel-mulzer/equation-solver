@@ -30,7 +30,7 @@ header{
     align-items: center;
 }
 
-header h2{
+header h1{
     font-size: 1.6rem;
     letter-spacing: 1px;
     text-align: center;
@@ -56,7 +56,7 @@ svg#logo:hover #S{
     fill: var(--accent-color);
 }
 svg#logo:hover #M{
-    fill: var(--accent-color2);
+    fill: var(--accent-color-2);
 }
 
 

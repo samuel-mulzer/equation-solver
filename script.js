@@ -39,7 +39,7 @@ let solutions = [];
 
 
 // getting order input and setting the eqution input
-orderInput.value = 3;
+orderInput.value = parseInt(window.innerWidth / 120);
 order = orderInput.value;
 orderOuput.textContent = order;
 
@@ -72,7 +72,7 @@ let setEquation = order => {
         let span = document.createElement("span");
     
         let input = document.createElement("input");
-        input.type = "number"
+        input.type = "text"
         input.required = true;
         input.placeholder = 1;
         input.classList.add("coefficient-input");
@@ -119,7 +119,7 @@ let setEquation = order => {
 setEquation(order);
 
 orderInput.addEventListener("input", () => {
-    orderInput.setAttribute("max", parseInt(window.innerWidth / 100));
+    orderInput.setAttribute("max", parseInt(window.innerWidth / 120));
 
     order = orderInput.value;
     orderOuput.textContent = order;
@@ -176,7 +176,7 @@ function getCoefficients() {
             coefficients[i] = coefficientInputs[i].placeholder;
         }
 
-        coefficients[i] = parseFloat(coefficients[i]);
+        coefficients[i] = parseFloat(coefficients[i].replace(",", "."));
     }
 
     console.log("coefficients: " + coefficients);
@@ -206,6 +206,7 @@ function solveEquation() {
         n++;
     }
     console.timeEnd("solvingTime");
+    solutions.reverse()
 }
 
 // setting the solutions and linear factors in the output section
