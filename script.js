@@ -29,19 +29,7 @@ if (!localStorage.calculations){
     }, 2000);
 }
 const calculations = document.getElementById("calculations");
-calculations.textContent = localStorage.calculations
-
-
-// defining important variables / arrays
-let order;
-let coefficients = [];
-let solutions = [];
-
-
-// getting order input and setting the eqution input
-orderInput.value = parseInt(window.innerWidth / 120);
-order = orderInput.value;
-orderOuput.textContent = order;
+calculations.textContent = localStorage.calculations;
 
 
 
@@ -50,9 +38,9 @@ orderOuput.textContent = order;
 let run = () => {
     clearOuput();
 
-    getCoefficients();
-    solveEquation();
-    setOutput();
+    let coefficients = getCoefficients();
+    let solutions = solveEquation(coefficients);
+    setOutput(solutions);
     
 
     localStorage.calculations = parseInt(localStorage.calculations) + 1;
@@ -64,35 +52,34 @@ button.addEventListener("click", run);
 
 
 
-
 let setEquation = order => {
-    coefficientSection.textContent = "";
+    coefficientSection.textContent = '';
 
     let setCoefficient = i => {
-        let span = document.createElement("span");
+        let span = document.createElement('span');
     
-        let input = document.createElement("input");
-        input.type = "text"
+        let input = document.createElement('input');
+        input.type = 'number';
         input.required = true;
         input.placeholder = 1;
-        input.classList.add("coefficient-input");
+        input.classList.add('coefficient-input');
         span.appendChild(input);
     
     
-        let expression = document.createElement("span");
-        expression.textContent = "x";
+        let expression = document.createElement('span');
+        expression.textContent = 'x';
     
     
-        let sup = document.createElement("sup");
+        let sup = document.createElement('sup');
         sup.textContent = i;
         expression.appendChild(sup);
     
     
-        let operator = document.createElement("span");
+        let operator = document.createElement('span');
         if (i > 0) {
-            operator.textContent = " +";
+            operator.textContent = ' +';
         } else {
-            operator.textContent = " = 0";
+            operator.textContent = ' = 0';
         }
     
         expression.appendChild(operator);
@@ -111,20 +98,45 @@ let setEquation = order => {
     coefficientInputs = document.getElementsByClassName("coefficient-input");
 
     for (i of coefficientInputs) {
-        i.addEventListener("focus", toInputView);
+        i.addEventListener('focus', toInputView);
+        i.addEventListener('input', toInputView);
     }
 
     orderInput.addEventListener("input", toInputView)
 }
-setEquation(order);
 
-orderInput.addEventListener("input", () => {
-    orderInput.setAttribute("max", parseInt(window.innerWidth / 120));
 
-    order = orderInput.value;
+
+
+let getMaxOrder = () => { return parseInt(window.innerWidth / 136) }
+
+let setOrder = order => {
     orderOuput.textContent = order;
-
+    orderInput.setAttribute('max', getMaxOrder());
+    orderInput.setAttribute('value', getMaxOrder());
     setEquation(order);
+}
+setOrder(getMaxOrder());
+
+
+orderInput.addEventListener('input', () => {
+    order = orderInput.value;
+    setOrder(order);
+});
+
+
+let width = window.innerWidth;
+window.addEventListener('resize', () => {
+    if (width != window.innerWidth) {
+        width = window.innerWidth;
+
+        order = orderInput.value;
+        let maxOrder = getMaxOrder();
+
+        order = maxOrder;
+        setOrder(order);
+        
+    }
 });
 
 
@@ -135,7 +147,6 @@ function toOuputView() {
 }
 function toInputView() {
     inputSection.classList.remove("minimized");
-
     button.classList.remove("minimized");
     button.textContent = "Run";
 }
@@ -161,10 +172,8 @@ function clearOuput() {
 
 
 // getting coefficients from the input elements and saving them in the coefficients array
-function getCoefficients() {
-
+let getCoefficients = () => {
     coefficients = [];
-    solutions = [];
 
     coefficientInputs = document.getElementsByClassName("coefficient-input");
 
@@ -182,18 +191,21 @@ function getCoefficients() {
     console.log("coefficients: " + coefficients);
 
     coefficients.reverse();
+    return coefficients;
 }
 
 
 
 // solving the equation and saving the results in the solutions array
-function solveEquation() {
+let  solveEquation = coefficients => {
+    let solutions = [];
+
     console.time("solvingTime");
     let n = -2000;
     while (n <= 2000) {
         let sum = 0;
 
-        x = n / 100
+        x = n / 100;
 
         for (i = 0; i < coefficients.length; i++) {
             sum += (coefficients[i] * ((x) ** i));
@@ -206,11 +218,12 @@ function solveEquation() {
         n++;
     }
     console.timeEnd("solvingTime");
-    solutions.reverse()
+    solutions.reverse();
+    return solutions;
 }
 
 // setting the solutions and linear factors in the output section
-function setOutput() {
+let setOutput = solutions => {
 
     button.textContent = "solutions: " + solutions.length;
     console.log("solutions: " + `(determined: ${solutions.length})`);
